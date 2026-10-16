@@ -854,11 +854,15 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(`🏛️  PORTAL AKADEMIK UNIVERSITAS CAKRAWALA DIGITAL (SIAKAD)`);
-  console.log(`🚀  Server berjalan di: http://localhost:${PORT}`);
-  console.log(`🛡️  Security Lab & Intentional Vulnerabilities Active`);
-  console.log(`=======================================================`);
-});
+// Export app for Netlify/Serverless or start server locally
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(`🏛️  PORTAL AKADEMIK UNIVERSITAS CAKRAWALA DIGITAL (SIAKAD)`);
+    console.log(`🚀  Server berjalan di: http://localhost:${PORT}`);
+    console.log(`🛡️  Security Lab & Intentional Vulnerabilities Active`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = app;
